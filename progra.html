@@ -1,0 +1,240 @@
+
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>historia de la robotica humanoide</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<main class="container">
+<center><h1 class="title" data-effect="color"> <p> <font size="6">aprendamos mas sobre la historia de la robotica humanoide</font></p></h1>
+
+</main>
+
+
+<script>
+document.addEventListener('click', (e) => {
+const el = e.target.closest('[data-effect]');
+if (!el) return;
+const effect = el.dataset.effect;
+el.classList.remove('active');
+// reflow to restart animation
+void el.offsetWidth;
+el.classList.add('active', `effect-${effect}`);
+setTimeout(() => {
+el.classList.remove('active', `effect-${effect}`);
+}, 900);
+});
+</script>
+</body>
+</html>
+<style>
+
+/* styles.css */
+/* Estilos base */
+:root{
+  --bg: #0f1724;
+  --card: #0b1220;
+  --text: #e6eef8;
+  --muted: #9fb0c8;
+  --accent: #7ce4d9;
+  --glass: rgba(255,255,255,0.04);
+}
+
+*{box-sizing:border-box}
+html,body{
+  height:100%;
+  margin:0;
+  font-family:Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg,#071028 0%, #0f1724 100%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.container{
+  max-width:880px;
+  margin:6vh auto;
+  padding:28px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border-radius:18px;
+  box-shadow: 0 6px 30px rgba(2,6,23,0.6);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* Tipografía */
+.title{
+  font-size:2.4rem;
+  margin:0 0 10px 0;
+  letter-spacing: -0.02em;
+  cursor:pointer;
+  display:inline-block;
+  padding:8px 12px;
+  border-radius:10px;
+  transition:transform .25s ease;
+  user-select: none;
+}
+
+.lead{
+  margin:0 0 20px 0;
+  color:var(--muted);
+  font-size:1.05rem;
+  cursor:pointer;
+  display:inline-block;
+  padding:6px 10px;
+  border-radius:8px;
+  user-select:none;
+}
+
+/* Botones con efectos */
+.grid{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:16px;
+}
+.chip{
+  background:var(--glass);
+  border:1px solid rgba(255,255,255,0.04);
+  padding:8px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:600;
+  letter-spacing:0.02em;
+  user-select:none;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+
+/* Estado activo: refuerzo visual cuando se aplica un efecto */
+.active{
+  box-shadow: 0 10px 30px rgba(3,12,29,0.6);
+  transform: translateY(-3px);
+}
+
+/* ---- Animaciones ---- */
+/* Duraciones pensadas para el script: ~900ms total */
+@keyframes bounceIn {
+  0%{ transform: translateY(0) scale(1); }
+  30%{ transform: translateY(-20px) scale(1.05); }
+  55%{ transform: translateY(6px) scale(0.98); }
+  75%{ transform: translateY(-6px) scale(1.02); }
+  100%{ transform: translateY(0) scale(1); }
+}
+
+.effect-bounce.active{
+  animation: bounceIn 0.9s ease;
+}
+
+/* Fade & glow */
+@keyframes fadePop {
+  0%{ opacity:0.25; transform: translateY(8px) scale(0.98); filter: blur(1px); }
+  40%{ opacity:1; transform: translateY(-6px) scale(1.02); filter: blur(0); }
+  100%{ opacity:1; transform: translateY(0) scale(1); }
+}
+.effect-fade.active{
+  animation: fadePop 0.9s cubic-bezier(.2,.9,.3,1);
+}
+
+/* Glow: pulso de brillo */
+@keyframes glowPulse {
+  0%{ box-shadow: 0 0 0 0 rgba(124,228,217,0.0); transform: scale(1); }
+  40%{ box-shadow: 0 0 18px 6px rgba(124,228,217,0.18); transform: scale(1.03); }
+  100%{ box-shadow: 0 0 0 0 rgba(124,228,217,0); transform: scale(1); }
+}
+.effect-glow.active{
+  animation: glowPulse 0.9s ease;
+  border: 1px solid rgba(124,228,217,0.12);
+}
+
+/* Flip: giro 3D */
+.effect-flip.active{
+  transform-origin: center;
+  animation: flip3d 0.9s cubic-bezier(.2,.9,.3,1);
+  perspective: 800px;
+}
+@keyframes flip3d {
+  0%{ transform: rotateX(0) rotateY(0) translateZ(0) scale(1); }
+  40%{ transform: rotateY(180deg) translateZ(20px) scale(1.02); }
+  100%{ transform: rotateY(360deg) translateZ(0) scale(1); }
+}
+
+/* Shake: sacudida rápida */
+@keyframes shake {
+  0%{ transform: translateX(0) rotate(0); }
+  15%{ transform: translateX(-8px) rotate(-2deg); }
+  30%{ transform: translateX(8px) rotate(2deg); }
+  45%{ transform: translateX(-6px) rotate(-1deg); }
+  60%{ transform: translateX(6px) rotate(1deg); }
+  75%{ transform: translateX(-3px) rotate(-0.5deg); }
+  100%{ transform: translateX(0) rotate(0); }
+}
+.effect-shake.active{
+  animation: shake 0.9s ease-in-out;
+}
+
+/* Color: transición de color y fondo */
+@keyframes colorSwap {
+  0%{ color:var(--text); background: transparent; transform: scale(1); }
+  40%{ color: #08101a; background: linear-gradient(90deg, var(--accent), #7c9ef2); transform: scale(1.03); }
+  100%{ color:var(--text); background: transparent; transform: scale(1); }
+}
+.effect-color.active{
+  animation: colorSwap 0.9s ease;
+  border-radius:12px;
+  padding:8px 14px;
+}
+
+/* Accesibilidad: foco con teclado */
+.title:focus, .lead:focus, .chip:focus{
+  outline: 3px solid rgba(124,228,217,0.14);
+  outline-offset: 4px;
+}
+
+/* Pequeños toques responsivos */
+@media (max-width:560px){
+  .container{ margin:4vh 14px; padding:18px; }
+  .title{ font-size:1.6rem;}
+  .grid{ gap:8px; }
+}
+
+</style>
+
+
+
+
+
+
+<title> historia de la robotica</title> <center>
+</head> 
+<body>
+<h1 class="title" data-effect="color"> <font size="5"> historia de la robótica humanoide...... </p></h1></font></center>
+ <center><h1 class="title" data-effect="shake"> <font size="5"> comienza con mitos antiguos y los primeros autónomatas mecanicos en Europa. Los hitos importantes incluyen el autómata mecanico Leonardo da vinci en 1495 en el siglo XVIII, el primer robot de la historia llamado Elektro presentado en 1939 y la introduccion de de robots mas complejos con capacidades limitadas de movimiento y voz en el siglo XX </p></font> </h1>
+</center> <center>
+<img src= "img/desca.jpg " width= "300" height= "300"/>
+ <center>
+ <h2>  </h2>
+ 
+ <h1 class="title" data-effect="flip"> <font size="5"> siglo XX y la robótica moderna......</p></h1></font></center>
+
+ 
+  <h1 class="title" data-effect="shake"> <font size="5"> Elektro: presentado en la feria mundial de nueva york de 1939 por westinghouse, Elektro fue el primer robot humanoide del mundo que podia realizar movimientos básicos y hablar, aun que sus capacidades eran limitadas y preprogramadas asta este momento comenzaron las nevas mejoras para las tecnologias que serian futuras para el mundo entero</p></font> </h1>
+ <h1 class="title" data-effect="shake"> <font size="5"> robots avanzados de hoy: los robots humanoidesactuales, como Atlas de boston Dynamics y Sophia de hanson robotics, son cada vez mas sofistiados, con inteligencia artificial (IA) avanzada, vision por computadora y capacidad para interactuar de forma autonoma con el entorno estan moderando nuestra epoca actual y guiandonos a un futuro mejor y nuvas tecnlogias muy avanzadas revolucionando nuestra epocas y futuras epocas para las siguentes generaciones </p></font> </h1>
+ <style>
+	  body {
+            background-color: #04a9fb; /* Fondo */
+            }
+		</style>
+		<h2> <A HREF=" index.html" > Regresar</h2></A>
+		
+
+		<center> <h2> Espero que te alla gustado... </h2> 
+		<h2> 
+		</h2>
+		<h2> 
+		</h2>
+</center>
+</body> 
+</head>
+</html>
